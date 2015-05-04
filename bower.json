@@ -1,0 +1,35 @@
+{
+  "name": "polimero-plot",
+  "version": "0.0.1",
+  "authors": [
+    "Jan Aerts <jan.aerts@gmail.com>"
+  ],
+  "description": "Methods common between Polimero elements",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "visualization",
+    "polimero",
+    "d3"
+  ],
+  "main": "polimero-plot.html",
+  "license": "MIT",
+  "homepage": "https://github.com/polimero/polimero-plot/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~0.8.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "*"
+  }
+}

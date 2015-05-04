@@ -1,0 +1,94 @@
+<!--
+@license
+Copyright (c) 2015 Jan Aerts. All rights reserved.
+The complete set of contributors may be found at http://bitbucket.org/vda-lab/polimero/CONTRIBUTORS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<polymer-element name="polimero-plot" attributes="data selected">
+	<template>
+    <style>
+			circle {
+				stroke: rgba(0,0,0,0.5);
+				stroke-width: 1;			
+			}
+			rect {
+				stroke: none;
+			}
+			path {
+				fill: none;
+				stroke: rgba(0,0,0,0.2);
+				stroke-width: 1;
+			}
+      .mark {
+				fill: rgba(0,0,0,0.2);
+				stroke-width: 1;
+      }
+			.mark .selected {
+				fill: red;
+				opacity: 1;
+			}
+			.axis path {
+				fill:none;
+				stroke: black;
+			}
+			.axis {
+				font-size:8pt;
+				font-family:sans-serif;
+			}
+			.tick {
+				fill: black;
+			}
+			.brush .extent {
+				fill-opacity: .1;
+				stroke: #fff;
+				shape-rendering: crispEdges;
+			}
+    </style>
+		
+		<svg id="svg"></svg>
+	</template>
+	<script>
+	Polymer('polimero-plot', {
+		ready: function() {
+			this.data = this.data || []
+
+			// Parsing the 'options' string from HTML element arguments
+			this.options = this.options || '{}'
+			this.opts = JSON.parse(this.options)
+			this.width = this.opts['width'] || 400
+			this.height = this.opts['height'] || 400
+
+			this.xAxis = this.opts['xaxis'] || false
+			this.yAxis = this.opts['yaxis'] || false
+			if ( this.xAxis ) {
+				this.yPadding = 30
+			} else {
+				this.yPadding = 0
+			}
+			if ( this.yAxis ) {
+				this.xPadding = 30
+			} else {
+				this.xPadding = 0
+			}
+		},
+		
+		selectedChanged: function(oldVal, newVal) {
+			var me = this
+			if ( oldVal != null ) {
+				if ( newVal.length > 0 ) {
+					oldVal.forEach(function(d) {
+						me.svg.select('#' + d).classed('selected',false)
+					})
+					newVal.forEach(function(d) {
+						me.svg.select('#' + d).classed('selected',true)
+					})
+				} else {
+					me.svg.selectAll(".selected").classed('selected',false)
+				}
+			}
+		},
+
+	})
+	</script>
+</polymer-element>
